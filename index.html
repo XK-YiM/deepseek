@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek AI</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="app">
+        <div id="language-selector">
+            <button id="switch-to-zh">中文</button>
+            <button id="switch-to-en">English</button>
+        </div>
+        <h1 id="app-title">DeepSeek AI</h1>
+        <div id="login-form">
+            <h2 id="login-title">登录</h2>
+            <form id="login">
+                <input type="email" id="login-email" placeholder="邮箱" required>
+                <input type="password" id="login-password" placeholder="密码" required>
+                <button type="submit">登录</button>
+            </form>
+            <button id="register-btn">注册</button>
+        </div>
+        <div id="register-form" style="display: none;">
+            <h2 id="register-title">注册</h2>
+            <form id="register">
+                <input type="email" id="register-email" placeholder="邮箱" required>
+                <input type="password" id="register-password" placeholder="密码" required>
+                <button type="submit">注册</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
