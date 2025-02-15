@@ -1,20 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>管理员登录</title>
-    <link rel="stylesheet" href="../style.css">
-    <script src="admin.js" defer></script>
+    <title>管理员后台</title>
+    <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-    <div class="app">
-        <h1>管理员登录</h1>
-        <form id="admin-login">
-            <input type="email" id="admin-email" placeholder="管理员邮箱" required>
-            <input type="password" id="admin-password" placeholder="管理员密码" required>
-            <button type="submit">登录</button>
-        </form>
+    <div class="container">
+        <h1>管理员后台</h1>
+        <p>欢迎管理员！</p>
+        <p>在这里可以管理用户数据和配置。</p>
+        <div id="adminPanel"></div>
     </div>
+    <script src="admin.js"></script>
 </body>
 </html>
