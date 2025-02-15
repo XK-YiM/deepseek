@@ -1,60 +1,63 @@
-document.getElementById('switch-to-zh').addEventListener('click', () => {
-    document.documentElement.lang = 'zh';
-    translateToChinese();
-});
-
-document.getElementById('switch-to-en').addEventListener('click', () => {
-    document.documentElement.lang = 'en';
-    translateToEnglish();
-});
-
-function translateToChinese() {
-    document.getElementById('app-title').textContent = 'DeepSeek AI';
-    document.getElementById('login-title').textContent = '登录';
-    document.getElementById('register-title').textContent = '注册';
+// script.js
+// 语言切换逻辑
+function switchLanguage(lang) {
+    if (lang === 'en-US') {
+        document.documentElement.lang = 'en-US';
+        document.querySelector('h1').textContent = 'Welcome';
+        document.querySelector('button:nth-child(2)').textContent = 'Switch to Chinese';
+        document.querySelector('a[href="login.html"]').textContent = 'Login';
+        document.querySelector('a[href="register.html"]').textContent = 'Register';
+    } else {
+        document.documentElement.lang = 'zh-CN';
+        document.querySelector('h1').textContent = '欢迎使用';
+        document.querySelector('button:nth-child(2)').textContent = '切换到英文';
+        document.querySelector('a[href="login.html"]').textContent = '登录';
+        document.querySelector('a[href="register.html"]').textContent = '注册';
+    }
 }
 
-function translateToEnglish() {
-    document.getElementById('app-title').textContent = 'DeepSeek AI';
-    document.getElementById('login-title').textContent = 'Login';
-    document.getElementById('register-title').textContent = 'Register';
-}
+// 表单提交逻辑
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
 
-// 默认加载中文
-translateToChinese();
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = loginForm.elements['email'].value;
+            const password = loginForm.elements['password'].value;
 
-// 注册和登录逻辑
-document.getElementById('register-btn').addEventListener('click', () => {
-    document.getElementById('login-form').style.display = 'none';
-    document.getElementById('register-form').style.display = 'block';
-});
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
 
-document.getElementById('register').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('register-email').value;
-    const password = document.getElementById('register-password').value;
+            if (response.ok) {
+                alert('登录成功！');
+            } else {
+                alert('登录失败，请检查邮箱和密码。');
+            }
+        });
+    }
 
-    const response = await fetch('https://your-worker-url/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-    });
+    if (registerForm) {
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = registerForm.elements['email'].value;
+            const password = registerForm.elements['password'].value;
 
-    const data = await response.json();
-    alert(data.message);
-});
+            const response = await fetch('/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
 
-document.getElementById('login').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
-
-    const response = await fetch('https://your-worker-url/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-    });
-
-    const data = await response.json();
-    alert(data.message);
+            if (response.ok) {
+                alert('注册成功，请检查邮箱验证。');
+            } else {
+                alert('注册失败，邮箱可能已被注册。');
+            }
+        });
+    }
 });
